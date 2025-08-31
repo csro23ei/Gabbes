@@ -6,6 +6,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f8f9fa;
+    /* behåller din bakgrundsfärg */
     display: flex;
     flex-direction: column;
 }
@@ -15,6 +16,7 @@ body {
 
 .topbar {
     background: #ffffff;
+    /* behåller din topbar-färg */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,6 +41,7 @@ body {
 
 .topbar nav a {
     background: #005fa3;
+    /* behåller knappfärg */
     color: #fff;
     padding: 12px 22px;
     border-radius: 8px;
@@ -49,6 +52,7 @@ body {
 
 .topbar nav a:hover {
     background: #004080;
+    /* behåller hover-färg */
     transform: scale(1.1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
@@ -65,37 +69,51 @@ main {
 }
 
 
-/* Main A4 */
+/* Main A4-liknande ruta */
 
 .main-container {
-    width: 80%;
-    padding: 150px;
+    width: 60%;
+    max-width: 800px;
+    padding: 40px;
+    /* mindre padding än 150px för bättre centrering */
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    color: #fff;
+    color: #333;
+    /* behåller textfärg */
     text-align: center;
+    background: #fff;
+    /* vit bakgrund för att behålla kontrast */
 }
+
+
+/* Rubrik och text */
 
 .main-container h1 {
     margin-bottom: 20px;
     color: #333;
+    /* behåller rubrikfärg */
 }
 
 .main-container p {
     font-size: 18px;
     line-height: 1.6;
     color: #333;
+    /* behåller textfärg */
 }
 
 
-/* Kontakt  */
+/* Footer */
 
 .footer {
     background: #333;
+    /* behåller footer-färg */
     color: white;
     text-align: center;
     padding: 20px 20px;
 }
+
+
+/* Footer innehåll */
 
 .footer h2 {
     margin-bottom: 15px;
@@ -103,6 +121,7 @@ main {
 
 .footer a {
     color: #1da1f2;
+    /* behåller länkfärg */
     text-decoration: none;
 }
 
@@ -128,6 +147,7 @@ main {
 
 .footer .socials a:hover {
     color: #0077cc;
+    /* behåller hover-färg */
 }
 
 
