@@ -49,23 +49,24 @@
 
     <!-- Hämta bilder från WordPress -->
     <script>
-        fetch("http://localhost/wordpress/wordpress/wp-json/wp/v2/media")
+        // Byt ut localhost mot din WordPress-URL i produktion
+        const wpApiUrl = "http://localhost/wordpress/wordpress/wp-json/wp/v2/media";
+
+        fetch(wpApiUrl)
             .then(res => res.json())
             .then(data => {
                 const gallery = document.getElementById("product-gallery");
 
-                // Skapa <a> runt bilden för lightbox
+                // Skapa <a> runt bilden som öppnar helvy i ny flik
                 gallery.innerHTML = data.map(img => `
-          <a href="${img.source_url}">
-            <img src="${img.source_url}" alt="${img.alt_text}">
-          </a>
-        `).join("");
-
-                // Initiera SimpleLightbox
-                const lightbox = new SimpleLightbox('#product-gallery a', {});
+              <a href="${img.source_url}" target="_blank">
+                <img src="${img.source_url}" alt="${img.alt_text || 'Produktbild'}">
+              </a>
+            `).join("");
             })
-            .catch(err => console.error("Fel vid hämtning:", err));
+            .catch(err => console.error("Fel vid hämtning av bilder:", err));
     </script>
+
 </body>
 
 </html>
