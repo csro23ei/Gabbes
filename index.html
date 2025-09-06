@@ -25,10 +25,8 @@
 
     <!-- container -->
     <main>
-        <div class="main-container">
-            <h1>Vi bygger din drömplåtis!</h1>
-            <p>Hos oss får du hög kvalitet, smarta lösningar och personlig touch – allt till attraktiva priser. Vi brinner för plåtisar och gör allt för att din nästa husbilsresa ska bli perfekt. Låt oss förvandla din idé till verklighet!</p>
-
+        <div class="main-container" id="post-content">
+            <!-- WordPress-innehåll kommer hämtas hit -->
         </div>
     </main>
 
@@ -42,6 +40,22 @@
             <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
         </div>
     </footer>
+
+    <script>
+        // Byt 123 mot ID:t på ditt inlägg
+        const postId = 6;
+
+        fetch(`http://localhost/wordpress/wordpress/wp-json/wp/v2/posts/6
+`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('post-content').innerHTML = `
+            <h1>${data.title.rendered}</h1>
+            ${data.content.rendered}
+        `;
+            })
+            .catch(error => console.error('Fel vid hämtning:', error));
+    </script>
 
 </body>
 
