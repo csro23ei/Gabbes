@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Våra Produkter</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- SimpleLightbox CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar -->
+    <header class="topbar">
+        <img src="Camp-logo-removebg-preview.png" alt="Camp logo" class="topbar-img">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produkter.html" class="active">Våra Produkter</a>
+        </nav>
+        <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
+    </header>
+
+    <!-- Produkter -->
+    <main>
+        <div class="main-container">
+            <h1>Våra Produkter</h1>
+            <div id="product-gallery" class="gallery">
+                <!-- Bilder laddas in här -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Kontakt -->
+    <footer class="footer">
+        <h2>Kontakt</h2>
+        <p><strong>Telefon:</strong> +46735913525</p>
+        <p><strong>E-mail:</strong> <a href="mailto:Info@cgtsweden.se">Info@cgtsweden.se</a></p>
+        <div class="socials">
+            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- SimpleLightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
+
+    <!-- Hämta bilder från WordPress -->
+    <script>
+        fetch("http://localhost/wordpress/wordpress/wp-json/wp/v2/media")
+            .then(res => res.json())
+            .then(data => {
+                const gallery = document.getElementById("product-gallery");
+
+                // Skapa <a> runt bilden för lightbox
+                gallery.innerHTML = data.map(img => `
+          <a href="${img.source_url}">
+            <img src="${img.source_url}" alt="${img.alt_text}">
+          </a>
+        `).join("");
+
+                // Initiera SimpleLightbox
+                const lightbox = new SimpleLightbox('#product-gallery a', {});
+            })
+            .catch(err => console.error("Fel vid hämtning:", err));
+    </script>
+</body>
+
+</html>

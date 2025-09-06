@@ -73,7 +73,7 @@ main {
 
 .main-container {
     width: 60%;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 40px;
     /* mindre padding än 150px för bättre centrering */
     border-radius: 12px;
@@ -166,4 +166,29 @@ main {
         flex-direction: column;
         gap: 20px;
     }
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 bilder per rad */
+    gap: 10px;
+    /* mellanrum mellan bilder */
+    margin-top: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 225px;
+    /* samma höjd på alla bilder */
+    object-fit: cover;
+    /* beskär utan att skeva */
+    cursor: pointer;
+    border-radius: 8px;
+    /* rundade hörn */
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+    /* liten zoom vid hover */
 }
