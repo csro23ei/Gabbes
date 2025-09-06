@@ -26,7 +26,7 @@
     <!-- Produkter -->
     <main>
         <div class="main-container">
-            <h1>Våra Produkter2</h1>
+            <h1>Våra Produkter3</h1>
             <div id="product-gallery" class="gallery">
                 <!-- Bilder laddas in här -->
             </div>
@@ -49,7 +49,6 @@
 
     <!-- Hämta bilder från WordPress -->
     <script>
-        // Byt ut localhost mot din WordPress-URL i produktion
         const wpApiUrl = "http://localhost/wordpress/wordpress/wp-json/wp/v2/media";
 
         fetch(wpApiUrl)
@@ -57,12 +56,19 @@
             .then(data => {
                 const gallery = document.getElementById("product-gallery");
 
-                // Skapa <a> runt bilden som öppnar helvy i ny flik
+                // Skapa <a> runt varje bild för lightbox
                 gallery.innerHTML = data.map(img => `
-              <a href="${img.source_url}" target="_blank">
+              <a href="${img.source_url}">
                 <img src="${img.source_url}" alt="${img.alt_text || 'Produktbild'}">
               </a>
             `).join("");
+
+                // Initiera SimpleLightbox
+                new SimpleLightbox('#product-gallery a', {
+                    nav: true, // bläddra mellan bilder
+                    close: true, // kryss för att stänga
+                    captions: false // inga captions
+                });
             })
             .catch(err => console.error("Fel vid hämtning av bilder:", err));
     </script>
