@@ -7,8 +7,6 @@
     <title>Våra Produkter</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- SimpleLightbox CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.css" rel="stylesheet">
 </head>
 
@@ -23,10 +21,16 @@
         <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
     </header>
 
+    <!-- Video över container -->
+    <div class="video-container">
+        <video id="product-video" src="video.mp4" muted autoplay loop playsinline></video>
+        <button id="mute-btn" class="mute-btn"><i class="fa-solid fa-volume-xmark"></i></button>
+    </div>
+
     <!-- Produkter -->
     <main>
         <div class="main-container">
-            <h1>Våra Produkter3</h1>
+            <h1>Våra Produkter</h1>
             <div id="product-gallery" class="gallery">
                 <!-- Bilder laddas in här -->
             </div>
@@ -44,35 +48,43 @@
         </div>
     </footer>
 
-    <!-- SimpleLightbox JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
 
-    <!-- Hämta bilder från WordPress -->
     <script>
-        const wpApiUrl = "http://localhost/wordpress/wordpress/wp-json/wp/v2/media";
+        // OBS: Byt till HTTPS när WordPress har SSL
+        const wpApiUrl = "http://www.cgtsweden.se/wp-json/wp/v2/media";
 
         fetch(wpApiUrl)
             .then(res => res.json())
             .then(data => {
                 const gallery = document.getElementById("product-gallery");
 
-                // Skapa <a> runt varje bild för lightbox
                 gallery.innerHTML = data.map(img => `
-              <a href="${img.source_url}">
-                <img src="${img.source_url}" alt="${img.alt_text || 'Produktbild'}">
-              </a>
-            `).join("");
+                    <a href="${img.source_url}">
+                        <img src="${img.source_url}" alt="${img.alt_text || 'Produktbild'}">
+                    </a>
+                `).join("");
 
-                // Initiera SimpleLightbox
                 new SimpleLightbox('#product-gallery a', {
-                    nav: true, // bläddra mellan bilder
-                    close: true, // kryss för att stänga
-                    captions: false // inga captions
+                    nav: true,
+                    close: true,
+                    captions: false
                 });
             })
             .catch(err => console.error("Fel vid hämtning av bilder:", err));
-    </script>
 
+
+        // Mute-knapp funktion
+        const video = document.getElementById("product-video");
+        const muteBtn = document.getElementById("mute-btn");
+
+        muteBtn.addEventListener("click", () => {
+            video.muted = !video.muted;
+            muteBtn.innerHTML = video.muted ?
+                '<i class="fa-solid fa-volume-xmark"></i>' :
+                '<i class="fa-solid fa-volume-high"></i>';
+        });
+    </script>
 </body>
 
 </html>
