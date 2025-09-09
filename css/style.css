@@ -2,10 +2,18 @@
 
 html,
 body {
+    background-image: url("../melina-kiefer.jpg");
+    background-size: cover;
+    /* täcker hela bakgrunden */
+    background-position: center;
+    /* centrerar bilden */
+    background-attachment: fixed;
+    /* bilden stannar när man scrollar */
+    margin: 0;
+    padding: 0;
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f8f9fa;
     /* behåller din bakgrundsfärg */
     display: flex;
     flex-direction: column;
