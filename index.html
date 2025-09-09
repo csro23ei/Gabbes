@@ -43,16 +43,14 @@
     </footer>
 
     <script>
-        const postId = 6;
-
-        fetch(`http://localhost/wordpress/wordpress/wp-json/wp/v2/posts/6
-`)
+        const postId = 1;
+        fetch("http://www.cgtsweden.se/wp-json/wp/v2/posts/1")
             .then(response => response.json())
             .then(data => {
                 document.getElementById('post-content').innerHTML = `
-            <h1>${data.title.rendered}</h1>
-            ${data.content.rendered}
-        `;
+      <h1>${data.title.rendered}</h1>
+      ${data.content.rendered}
+    `;
             })
             .catch(error => console.error('Fel vid hämtning:', error));
     </script>
