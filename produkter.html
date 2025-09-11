@@ -21,18 +21,22 @@
         <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
     </header>
 
-    <!-- Video över container -->
-    <div class="video-container">
-        <video id="product-video" src="video.mp4" muted autoplay loop playsinline></video>
-        <button id="mute-btn" class="mute-btn"><i class="fa-solid fa-volume-xmark"></i></button>
-    </div>
-
-    <!-- Produkter -->
+    <!-- Video + Container -->
     <main>
-        <div class="main-container">
-            <h1>Våra Produkter</h1>
-            <div id="product-gallery" class="gallery">
-                <!-- Bilder laddas in här -->
+        <div class="content-wrapper">
+            <!-- Videon -->
+            <div class="video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="video.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- Container -->
+            <div class="main-container">
+                <h1>Våra Produkter</h1>
+                <div id="product-gallery" class="gallery">
+                    <!-- Bilder laddas in här -->
+                </div>
             </div>
         </div>
     </main>
@@ -52,7 +56,7 @@
 
     <script>
         // OBS: Byt till HTTPS när WordPress har SSL
-        const wpApiUrl = "http://www.cgtsweden.se/wp-json/wp/v2/media";
+        const wpApiUrl = "http://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
 
         fetch(wpApiUrl)
             .then(res => res.json())
@@ -72,18 +76,6 @@
                 });
             })
             .catch(err => console.error("Fel vid hämtning av bilder:", err));
-
-
-        // Mute-knapp funktion
-        const video = document.getElementById("product-video");
-        const muteBtn = document.getElementById("mute-btn");
-
-        muteBtn.addEventListener("click", () => {
-            video.muted = !video.muted;
-            muteBtn.innerHTML = video.muted ?
-                '<i class="fa-solid fa-volume-xmark"></i>' :
-                '<i class="fa-solid fa-volume-high"></i>';
-        });
     </script>
 </body>
 

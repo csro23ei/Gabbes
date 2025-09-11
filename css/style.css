@@ -80,7 +80,7 @@ main {
 /* Main A4-liknande ruta */
 
 .main-container {
-    width: 60%;
+    width: 65%;
     max-width: 1000px;
     padding: 40px;
     /* mindre padding än 150px för bättre centrering */
@@ -201,27 +201,33 @@ main {
 }
 
 
-/* Video ovanför containern */
+/* Wrapper för video + container */
 
-.video-container {
-    width: 80%;
-    max-width: 1200px;
-    margin: 40px auto 60px auto;
-    /* mer space under */
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    height: 600px;
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 40px auto;
+    max-width: 1400px;
 }
 
-.video-container video {
+
+/* Videoruta */
+
+.video-box {
+    flex: 1;
+    max-width: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.video-box video {
     width: 100%;
     height: 100%;
-    /* fyller hela containern */
     object-fit: cover;
-    /* behåller proportioner men täcker hela ytan */
     display: block;
-    border-radius: 12px;
 }
 
 .mute-btn {
