@@ -4,46 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plåtis</title>
+    <title>Delar</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Topbar -->
+
     <header class="topbar">
         <img src="Camp-logo-removebg-preview.png" alt="Camp logo" class="topbar-img">
         <nav>
             <a href="index.html">Home</a>
             <a href="produkter.html">Våra Produkter</a>
-            <a href="delar.html">Delar</a>
-
+            <a href="delar.html" class="active">Delar</a>
         </nav>
         <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
     </header>
 
-    <!-- Video + Container -->
-    <main>
-        <div class="content-wrapper">
-            <!-- Videon -->
-            <div class="video-box">
-                <video autoplay muted loop playsinline>
-                    <source src="video.mp4" type="video/mp4">
-                </video>
-            </div>
 
-            <!-- Container -->
-            <div class="main-container">
-                <h1>Plåtis</h1>
-                <div id="platis-gallery" class="gallery">
-                    <!-- Bilder med kategorin "Plåtis" laddas in här -->
-                </div>
+    <main>
+        <div class="main-container">
+            <h1>Delar</h1>
+            <div id="delar-gallery" class="gallery">
+
             </div>
         </div>
     </main>
 
-    <!-- Kontakt -->
+
     <footer class="footer">
         <h2>Kontakt</h2>
         <p><strong>Telefon:</strong> +46735913525</p>
@@ -57,27 +46,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
 
     <script>
-        // REST API URL för alla media
         const wpApiUrl = "http://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
-        const platisCategoryId = 5; // ID för kategorin "Plåtis"
+        const delarCategoryId = 4; // ID för kategorin "Delar"
 
         fetch(wpApiUrl)
             .then(res => res.json())
             .then(data => {
-                const gallery = document.getElementById("platis-gallery");
+                const gallery = document.getElementById("delar-gallery");
 
-                // Filtrera bilder med kategori "Plåtis"
-                const filtered = data.filter(img => img.attachment_categories && img.attachment_categories.includes(platisCategoryId));
 
-                // Rendera bilder
+                const filtered = data.filter(img => img.attachment_categories && img.attachment_categories.includes(delarCategoryId));
+
+
                 gallery.innerHTML = filtered.map(img => `
                     <a href="${img.source_url}">
-                        <img src="${img.source_url}" alt="${img.alt_text || 'Plåtis-bild'}">
+                        <img src="${img.source_url}" alt="${img.alt_text || 'Delar-bild'}">
                     </a>
                 `).join("");
 
-                // Initiera SimpleLightbox
-                new SimpleLightbox('#platis-gallery a', {
+
+                new SimpleLightbox('#delar-gallery a', {
                     nav: true,
                     close: true,
                     captions: false
