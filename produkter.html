@@ -43,7 +43,7 @@
         </div>
     </main>
 
-    <!-- Kontakt -->
+
     <footer class="footer">
         <h2>Kontakt</h2>
         <p><strong>Telefon:</strong> +46735913525</p>
@@ -57,7 +57,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
 
     <script>
-        // REST API URL för alla media
         const wpApiUrl = "http://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
         const platisCategoryId = 5; // ID för kategorin "Plåtis"
 
@@ -66,17 +65,17 @@
             .then(data => {
                 const gallery = document.getElementById("platis-gallery");
 
-                // Filtrera bilder med kategori "Plåtis"
+
                 const filtered = data.filter(img => img.attachment_categories && img.attachment_categories.includes(platisCategoryId));
 
-                // Rendera bilder
+
                 gallery.innerHTML = filtered.map(img => `
                     <a href="${img.source_url}">
                         <img src="${img.source_url}" alt="${img.alt_text || 'Plåtis-bild'}">
                     </a>
                 `).join("");
 
-                // Initiera SimpleLightbox
+
                 new SimpleLightbox('#platis-gallery a', {
                     nav: true,
                     close: true,
