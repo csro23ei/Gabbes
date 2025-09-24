@@ -8,17 +8,21 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="produkter.html">
+    <link rel="icon" type="image/png" sizes="32x32" href="Infinity_Camper_Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+
+
 </head>
 
 <body>
 
     <!-- Topbar -->
     <header class="topbar">
-        <img src="Camp-logo-removebg-preview.png" alt="Camp logo" class="topbar-img">
+        <img src="infi.camp.png" alt="Camp logo" class="topbar-img">
 
         <nav>
             <a href="#">Home</a>
-            <a href="produkter.html">Våra Produkter</a>
+            <a href="produkter.html">Våra Plåtisar</a>
             <a href="delar.html">Delar</a>
 
         </nav>
@@ -46,7 +50,7 @@
 
     <script>
         const postId = 1;
-        fetch("http://www.cgtsweden.se/wp-json/wp/v2/posts/1")
+        fetch("https://www.cgtsweden.se/wp-json/wp/v2/posts/1")
             .then(response => response.json())
             .then(data => {
                 document.getElementById('post-content').innerHTML = `

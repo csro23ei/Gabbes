@@ -7,16 +7,22 @@
     <title>Delar</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="Infinity_Camper_Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 </head>
 
 <body>
+    <!-- Topbar -->
     <header class="topbar">
-        <img src="Camp-logo-removebg-preview.png" alt="Camp logo" class="topbar-img">
+        <img src="infi.camp.png" alt="Camp logo" class="topbar-img">
+
         <nav>
-            <a href="index.html">Home</a>
-            <a href="produkter.html">Våra Produkter</a>
-            <a href="delar.html" class="active">Delar</a>
+            <a href="#">Home</a>
+            <a href="produkter.html">Våra Plåtisar</a>
+            <a href="delar.html">Delar</a>
+
         </nav>
+
         <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
     </header>
 
@@ -51,7 +57,7 @@
     </div>
 
     <script>
-        const wpApiUrl = "http://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
+        const wpApiUrl = "https://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
         const delarCategoryId = 4; // ID för kategorin "Delar"
 
         fetch(wpApiUrl)

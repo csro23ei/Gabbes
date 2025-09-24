@@ -8,18 +8,22 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="Infinity_Camper_Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 </head>
 
 <body>
     <!-- Topbar -->
     <header class="topbar">
-        <img src="Camp-logo-removebg-preview.png" alt="Camp logo" class="topbar-img">
+        <img src="infi.camp.png" alt="Camp logo" class="topbar-img">
+
         <nav>
-            <a href="index.html">Home</a>
-            <a href="produkter.html">Våra Produkter</a>
+            <a href="#">Home</a>
+            <a href="produkter.html">Våra Plåtisar</a>
             <a href="delar.html">Delar</a>
 
         </nav>
+
         <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
     </header>
 
@@ -28,10 +32,12 @@
         <div class="content-wrapper">
             <!-- Videon -->
             <div class="video-box">
-                <video autoplay muted loop playsinline>
+                <video autoplay muted loop playsinline id="mainVideo">
                     <source src="video.mp4" type="video/mp4">
                 </video>
+                <button class="mute-btn" id="muteBtn">🔇</button>
             </div>
+
 
             <!-- Container -->
             <div class="main-container">
@@ -57,25 +63,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
 
     <script>
-        const wpApiUrl = "http://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
-        const platisCategoryId = 5; // ID för kategorin "Plåtis"
+        const wpApiUrl = "https://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
+        const platisCategoryId = 5;
 
         fetch(wpApiUrl)
             .then(res => res.json())
             .then(data => {
                 const gallery = document.getElementById("platis-gallery");
-
-
                 const filtered = data.filter(img => img.attachment_categories && img.attachment_categories.includes(platisCategoryId));
-
-
                 gallery.innerHTML = filtered.map(img => `
                     <a href="${img.source_url}">
                         <img src="${img.source_url}" alt="${img.alt_text || 'Plåtis-bild'}">
                     </a>
                 `).join("");
-
-
                 new SimpleLightbox('#platis-gallery a', {
                     nav: true,
                     close: true,
@@ -83,7 +83,22 @@
                 });
             })
             .catch(err => console.error("Fel vid hämtning av bilder:", err));
+
+        const video = document.getElementById('mainVideo');
+        const muteBtn = document.getElementById('muteBtn');
+
+        function updateButton() {
+            muteBtn.textContent = video.muted ? '🔇' : '🔊';
+        }
+
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            updateButton();
+        });
+
+        updateButton();
     </script>
+
 </body>
 
 </html>
