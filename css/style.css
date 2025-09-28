@@ -11,8 +11,11 @@ body {
     /* bakgrunden stannar vid scroll */
     margin: 0;
     padding: 0;
-    height: 100%;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* gör att sidan fyller hela skärmen */
 }
 
 
@@ -57,6 +60,9 @@ body {
     transform: scale(1.1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
+
+/* Main */
 
 
 /* Main */
