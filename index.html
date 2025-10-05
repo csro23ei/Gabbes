@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Min sida</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="produkter.html">
     <link rel="icon" type="image/png" sizes="32x32" href="Infinity_Camper_Logo.png">
@@ -15,20 +15,26 @@
 </head>
 
 <body>
-
-    <!-- Topbar -->
     <header class="topbar">
         <img src="infi.camp.png" alt="Camp logo" class="topbar-img">
 
-        <nav>
-            <a href="#">Home</a>
-            <a href="produkter.html">Våra Plåtisar</a>
-            <a href="delar.html">Delar</a>
+        <!-- Hamburger toggle -->
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fa fa-bars"></i>
+        </div>
 
+        <!-- Navigationsmeny -->
+        <nav class="nav" id="navbar">
+            <a href="#">Home</a>
+            <a href="produkter.html">Infinity Camper</a>
+            <a href="delar.html">Älgstaket/Frontbågar till Lastbilar</a>
         </nav>
 
         <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
     </header>
+
+
+
 
     <!-- container -->
     <main>
@@ -43,12 +49,21 @@
         <p><strong>Telefon:</strong> +46735913525</p>
         <p><strong>E-mail:</strong> <a href="mailto:Info@cgtsweden.se">Info@cgtsweden.se</a></p>
         <div class="socials">
-            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1B5CBZM7mx/
+            " target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
+
         </div>
     </footer>
 
     <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+
+        mobileMenu.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+        });
+
+
         const postId = 1;
         fetch("https://www.cgtsweden.se/wp-json/wp/v2/posts/1")
             .then(response => response.json())

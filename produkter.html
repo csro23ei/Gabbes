@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plåtis</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
     <link rel="icon" type="image/png" sizes="32x32" href="Infinity_Camper_Logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 </head>
@@ -17,11 +19,16 @@
     <header class="topbar">
         <img src="infi.camp.png" alt="Camp logo" class="topbar-img">
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="produkter.html">Våra Plåtisar</a>
-            <a href="delar.html">Delar</a>
+        <!-- Hamburger toggle -->
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fa fa-bars"></i>
+        </div>
 
+        <!-- Navigationsmeny -->
+        <nav class="nav" id="navbar">
+            <a href="index.html">Home</a>
+            <a href="produkter.html">Infinity Camper</a>
+            <a href="delar.html">Älgstaket/Frontbågar till Lastbilar</a>
         </nav>
 
         <img src="CGT_bild-removebg-preview.png" alt="cgt bild" class="topbar-img">
@@ -32,58 +39,96 @@
         <div class="content-wrapper">
             <!-- Videon -->
             <div class="video-box">
-                <video autoplay muted loop playsinline id="mainVideo">
-                    <source src="video.mp4" type="video/mp4">
-                </video>
+                <video autoplay muted loop playsinline id="mainVideo"></video>
                 <button class="mute-btn" id="muteBtn">🔇</button>
             </div>
 
-
             <!-- Container -->
             <div class="main-container">
-                <h1>Plåtis</h1>
+                <h1>Galleri</h1>
                 <div id="platis-gallery" class="gallery">
-                    <!-- Bilder med kategorin "Plåtis" laddas in här -->
+                    <!-- Bilder & videor från kategori 5 laddas här -->
                 </div>
             </div>
         </div>
     </main>
-
 
     <footer class="footer">
         <h2>Kontakt</h2>
         <p><strong>Telefon:</strong> +46735913525</p>
         <p><strong>E-mail:</strong> <a href="mailto:Info@cgtsweden.se">Info@cgtsweden.se</a></p>
         <div class="socials">
-            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1B5CBZM7mx/" target="_blank">
+                <i class="fa-brands fa-square-facebook"></i>
+            </a>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
-
     <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+
+        mobileMenu.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+        });
+
         const wpApiUrl = "https://www.cgtsweden.se/wp-json/wp/v2/media?per_page=100";
-        const platisCategoryId = 5;
+        const platisCategoryId = 5; // galleri
+        const topVideoCategoryId = 6; // toppvideo
 
         fetch(wpApiUrl)
             .then(res => res.json())
             .then(data => {
+                // === Galleri (kategori 5) ===
                 const gallery = document.getElementById("platis-gallery");
-                const filtered = data.filter(img => img.attachment_categories && img.attachment_categories.includes(platisCategoryId));
-                gallery.innerHTML = filtered.map(img => `
-                    <a href="${img.source_url}">
-                        <img src="${img.source_url}" alt="${img.alt_text || 'Plåtis-bild'}">
-                    </a>
-                `).join("");
-                new SimpleLightbox('#platis-gallery a', {
-                    nav: true,
-                    close: true,
-                    captions: false
-                });
-            })
-            .catch(err => console.error("Fel vid hämtning av bilder:", err));
+                const filtered = data.filter(
+                    item => item.attachment_categories && item.attachment_categories.includes(platisCategoryId)
+                );
 
+                gallery.innerHTML = filtered.map(item => {
+                    if (item.mime_type.startsWith("image/")) {
+                        return `
+                            <a href="${item.source_url}" class="glightbox">
+                                <img src="${item.source_url}" alt="${item.alt_text || 'Plåtis-bild'}">
+                            </a>
+                        `;
+                    } else if (item.mime_type.startsWith("video/")) {
+                        return `
+                            <a href="${item.source_url}" class="glightbox" data-type="video">
+                                <video muted>
+                                    <source src="${item.source_url}" type="${item.mime_type}">
+                                </video>
+                            </a>
+                        `;
+                    } else {
+                        return "";
+                    }
+                }).join("");
+
+                GLightbox({
+                    selector: '.glightbox',
+                    touchNavigation: true,
+                    autoplayVideos: true
+                });
+
+                // === Toppvideo (kategori 6) ===
+                const topVideo = data.find(
+                    item => item.attachment_categories &&
+                    item.attachment_categories.includes(topVideoCategoryId) &&
+                    item.mime_type.startsWith("video/")
+                );
+
+                if (topVideo) {
+                    const videoEl = document.getElementById('mainVideo');
+                    videoEl.innerHTML = `
+                        <source src="${topVideo.source_url}" type="${topVideo.mime_type}">
+                    `;
+                    videoEl.load();
+                }
+            })
+            .catch(err => console.error("Fel vid hämtning av media:", err));
+
+        // === Ljudknapp för toppvideon ===
         const video = document.getElementById('mainVideo');
         const muteBtn = document.getElementById('muteBtn');
 
@@ -102,3 +147,4 @@
 </body>
 
 </html>
+```
