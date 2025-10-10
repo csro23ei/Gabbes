@@ -139,7 +139,7 @@
             gallery.innerHTML = items.map(img => `
             <div class="gallery-item" 
                 data-title="${img.title.rendered}" 
-                data-price="${img.caption.rendered.replace(/(<([^>]+)>)/gi, '') || 'Kontakta oss'}" 
+                data-price="${img.caption.rendered.replace(/(<([^>]+)>)/gi, '') || 'Kontakta oss för priser'}" 
                 data-desc="${(img.description.rendered).replace(/(<([^>]+)>)/gi, '')}" 
                 data-src="${img.source_url}"
                 data-tags="${img.attachment_tags ? img.attachment_tags.join(',') : ''}">

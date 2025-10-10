@@ -403,3 +403,47 @@ main {
     border-color: #005fa3;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
+
+
+/* ===== Plåtis-sidans layout ===== */
+
+.platis-page {
+    display: flex;
+    flex-direction: column;
+    /* stapla info, video, container vertikalt */
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+
+/* Info-ruta endast för Plåtis */
+
+.platis-page .info-box {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.platis-page .info-box h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #222;
+}
+
+.platis-page .info-box p {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.platis-page .content-wrapper {
+    margin-top: 30px;
+    /* lite luft under info-rutan */
+}
