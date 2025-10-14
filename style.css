@@ -417,30 +417,90 @@ main {
 }
 
 
-/* Info-ruta endast för Plåtis */
+/* === INFO-RUTA STYLING === */
 
-.platis-page .info-box {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.5);
-    padding: 2rem 1rem;
+
+/* === INFO-RUTA MED KORT === */
+
+.info-box {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
     text-align: center;
-    border-bottom: 2px solid #ccc;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
 }
 
-.platis-page .info-box h2 {
+.info-box h2 {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
-    color: #222;
+    margin-bottom: 2rem;
+    color: #ffffff;
 }
 
-.platis-page .info-box p {
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.6;
+
+/* Grid-layout */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+
+/* Enskilda kort */
+
+.info-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.7rem;
     color: #333;
+}
+
+.info-card p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+
+/* Responsiv anpassning */
+
+@media (max-width: 768px) {
+    .info-box {
+        padding: 1.5rem;
+    }
+    .info-card h3 {
+        font-size: 1.1rem;
+    }
+    .info-box h2 {
+        font-size: 1.6rem;
+    }
+}
+
+
+/* Gör den responsiv */
+
+@media (max-width: 768px) {
+    .info-box {
+        padding: 1.5rem;
+    }
+    .info-box h2 {
+        font-size: 1.5rem;
+    }
+    .info-section h3 {
+        font-size: 1.1rem;
+    }
 }
 
 .platis-page .content-wrapper {
